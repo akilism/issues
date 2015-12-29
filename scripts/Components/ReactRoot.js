@@ -6,6 +6,19 @@ import { arrArticles } from "../lib/articles";
 
 import hackingTeam from "../../assets/hacking_team.png";
 
+
+class ArticleItem extends Component {
+  render() {
+    const readMarker = (this.props.isRead) ? (<i className="read-marker"></i>) : "";
+
+    return (
+      <li className="article-item article-essential">
+        {article.title}
+        {readMarker}
+      </li>
+    );
+  }
+}
 export default class ReactRoot extends Component {
 
   componentWillMount() {
@@ -20,7 +33,7 @@ export default class ReactRoot extends Component {
     const requiredReading = arrArticles.filter((article) => {
             return _.any(article.tags, (tag) => { return (tag ===  "essential"); });
           }).map((article) => {
-            return (<li className="article-item article-essential">{article.title}</li>);
+            return (<ArticleItem {...article} />);
           }),
           deepDiveList = [];
 

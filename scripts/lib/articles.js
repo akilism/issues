@@ -34,6 +34,7 @@ export const arrArticles = [{ url: "http://motherboard.vice.com/read/police-grad
 { url: "http://motherboard.vice.com/read/spy-tech-company-hacking-team-gets-hacked",
  title: "Spy Tech Company 'Hacking Team' Gets Hacked",
  tags: ["essential"],
+ isRead: true,
  author: "LORENZO FRANCESCHI-BICCHIERAI",
  position: "STAFF WRITER",
  date: "July 5, 2015 // 10:02 PM EST" },
