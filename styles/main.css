@@ -37,6 +37,7 @@ a:active {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  flex-direction: column;
 }
 
 h1 {
@@ -44,5 +45,35 @@ h1 {
   margin: 0 auto;
   padding: 0;
   position: relative;
-  font: bold 2em/1.2em "TradeGothic",Helvetica Neue,Helvetica,Arial,sans-serif;
+  font: bold 5em/1.2em "TradeGothic",Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+h2 {
+ font: bold 2.5em/1.2em "TradeGothic",Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+.header-image {
+  height: 350px;
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+}
+
+ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  /*flex-wrap: wrap;*/
+}
+
+.article-item {
+  width: 250px;
+  height: 300px;
+  border: 1px solid #555;
+  margin: 0 10px;
+}
+
+
+.reading-list {
+  height: 300px;
 }
