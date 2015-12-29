@@ -1,0 +1,48 @@
+body {
+  font-family: "OpenSans";
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: #000;
+}
+
+a:visited {
+  color: #666;
+}
+
+a:active {
+  color: #aaa;
+}
+
+.no-pointer {
+  pointer-events: none;
+}
+
+.copy {
+  font-family: "OpenSans";
+}
+
+.headline {
+  font-family: "TradeGothic-BoldCondTwenty";
+}
+
+.root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+h1 {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+  font: bold 2em/1.2em "TradeGothic",Helvetica Neue,Helvetica,Arial,sans-serif;
+}
