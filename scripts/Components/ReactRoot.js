@@ -10,13 +10,17 @@ import header from "../../assets/header.png";
 
 class ArticleItem extends Component {
   render() {
-    const readMarker = (this.props.isRead) ? (<i className="read-marker"></i>) : "";
+    const readMarker = (this.props.isRead) ? (<i class="read-marker fa fa-check"></i>) : "";
 
     return (
       <li className="article-item article-essential">
         <img className="article-item-image" src="http://motherboard-images.vice.com/content-images/article/29058/1450807362692191.jpg" alt="The Worst Hacks of 2015" />
-        <div className="article-item-title">{this.props.title}</div>
-        {readMarker}
+        <div className="article-item-details">
+          <div className="article-item-title">{this.props.title}</div>
+          <div className="article-item-byline">By {this.props.author} {this.props.date}</div>
+          <div className="article-item-blurby">This year proved that nothing, and no one, is really safe from hackers.</div>
+          <div className="article-item-icons">{readMarker}</div>
+        </div>
       </li>
     );
   }
