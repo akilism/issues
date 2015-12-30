@@ -7,10 +7,15 @@ import { arrArticles } from "../lib/articles";
 import hackingTeam from "../../assets/hacking_team.png";
 import header from "../../assets/header.png";
 
-
+//notes:
+//save articles to "read later list"
+//generate unique read later urls based on some kind of hash of list articles and order?
+//save data to localstorage on the users browser...
+//???
 class ArticleItem extends Component {
   render() {
-    const readMarker = (this.props.isRead) ? (<i class="read-marker fa fa-check"></i>) : "";
+    const readMarker = (this.props.isRead) ? (<i class="read-marker fa fa-check"></i>) : "",
+          savemarker = (<i class="save-marker fa fa-plus"></i>);
 
     return (
       <li className="article-item article-essential">
@@ -19,7 +24,7 @@ class ArticleItem extends Component {
           <div className="article-item-title">{this.props.title}</div>
           <div className="article-item-byline">By {this.props.author} {this.props.date}</div>
           <div className="article-item-blurby">This year proved that nothing, and no one, is really safe from hackers.</div>
-          <div className="article-item-icons">{readMarker}</div>
+          <div className="article-item-icons">{readMarker} {saveMarker}</div>
         </div>
       </li>
     );
