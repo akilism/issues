@@ -76,7 +76,6 @@ export const arrArticles = [{ url: "http://motherboard.vice.com/read/police-grad
  position: "STAFF WRITER",
  date: "July 10, 2015 // 11:30 AM EST" },
 { url: "http://motherboard.vice.com/read/meet-the-companies-that-helped-hacking-team-sell-tools-to-repressive-governments",
-  tags: ["essential"],
  title: "Meet the Companies that Helped Hacking Team Sell Tools to Repressive Governments",
  author: "JOSHUA KOPSTEIN",
  position: "CONTRIBUTOR",
