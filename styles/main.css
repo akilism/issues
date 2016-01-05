@@ -134,13 +134,17 @@ ul {
 
 
 .article-item {
-  width: 45%;
-  /*border: 1px solid #555;*/
-  margin: 0 10px 30px 10px;
+  width: 48%;
+  margin: 0 10px 20px 10px;
   overflow: hidden;
-  padding-bottom: 5px;
-  /*background-color: #fff;*/
+  padding-bottom: 10px;
   font-family: "OpenSans";
+  border-bottom: solid 1px #dfdfdf;
+  display: flex;
+}
+
+.article-item-left {
+  width: 40%;
 }
 
 .article-item-details {
@@ -151,7 +155,7 @@ ul {
 }
 
 .article-item-image {
-  width: 34%;
+  width: 100%;
 }
 
 .article-item-title {
@@ -190,4 +194,84 @@ ul {
 
 .reading-list-small .article-item-title {
   padding-left: 5px;
+}
+
+.read-marker {
+
+}
+
+.read-marker ~ .save-marker {
+  color: #a2a2a2;
+}
+
+.save-marker {
+  cursor: pointer;
+}
+
+
+.article-tool-tip {
+  position: fixed;
+  border: solid 1px #a2a2a2;
+  z-index: 1000;
+  padding: 3px;
+  font-size: 0.75rem;
+  background-color: rgb(244, 244, 244);
+}
+
+.personal-reading-list {
+  padding: 0;
+  margin: 0;
+  width: 60%;
+  border: 3px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 0 0 20px 20px;
+}
+
+.reading-list-item {
+  display: flex;
+  margin: 15px 0 0 0;
+  width: 100%;
+  border-bottom: solid 1px #a2a2a2;
+  padding-bottom: 15px;
+}
+
+.reading-list-item:last-child {
+  border-bottom: none;
+}
+
+.reading-list-item .item-title {
+  display: block;
+  font-size: 1.125rem;
+}
+
+.reading-list-item .item-duration {
+  font-size: 0.85rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.reading-list-item .item-duration span {
+  margin-right: 3px;
+}
+
+.reading-list-item .item-byline {
+  font-size: 0.65rem;
+}
+
+.reading-list {
+  list-style-type:
+}
+
+.personal-reading-list-title {
+  font-size: 1.25em;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.add-all-personal-list {
+  border: 1px solid #a2a2a2;
+  border-radius: 3px;
+  padding: 3px;
+  font-size: 1.125em;
 }

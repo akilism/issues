@@ -7,39 +7,117 @@ import { arrArticles } from "../lib/articles";
 import hackingTeam from "../../assets/hacking_team.png";
 import header from "../../assets/header.png";
 
-//notes:
-//save articles to "read later list"
-//generate unique read later urls based on some kind of hash of list articles and order?
-//save data to localstorage on the users browser...
-//???
 class ArticleItem extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tooltipText: "",
+      tipDisplay: "none",
+      pos: { x: 0, y: 0 }
+    };
+  }
+
+  tooltip(text, evt) {
+    this.setState({tooltipText: text, pos: {x: (evt.clientX + 5), y: (evt.clientY + 10)}, tipDisplay: "block"});
+  }
+
+  hideTooltip() {
+    this.setState({tipDisplay: "none"});
+  }
+
   render() {
-    const readMarker = (this.props.isRead) ? (<i class="read-marker fa fa-check"></i>) : "",
-          savemarker = (<i class="save-marker fa fa-plus"></i>);
+    const {pos, tooltipText, tipDisplay} = this.state,
+          readMarker = (this.props.isRead) ? (<i onMouseMove={this.tooltip.bind(this, "Already Read!")} onMouseOut={this.hideTooltip.bind(this)} className="read-marker fa fa-check">&nbsp;</i>) : "",
+          saveMarker = (<i onMouseMove={this.tooltip.bind(this, "Add to Reading List")} onMouseOut={this.hideTooltip.bind(this)} className="save-marker fa fa-plus">&nbsp;</i>);
 
     return (
       <li className="article-item article-essential">
-        <img className="article-item-image" src="http://motherboard-images.vice.com/content-images/article/29058/1450807362692191.jpg" alt="The Worst Hacks of 2015" />
+        <div className="article-item-left">
+          <img className="article-item-image" src="http://motherboard-images.vice.com/content-images/article/29058/1450807362692191.jpg" alt="The Worst Hacks of 2015" />
+          <div className="article-item-icons">{readMarker} {saveMarker}</div>
+        </div>
         <div className="article-item-details">
           <div className="article-item-title">{this.props.title}</div>
-          <div className="article-item-byline">By {this.props.author} {this.props.date}</div>
+          <div className="article-item-byline">By {this.props.author} <br/> {this.props.date}</div>
           <div className="article-item-blurby">This year proved that nothing, and no one, is really safe from hackers.</div>
+        </div>
+        <div className="article-tool-tip" ref="tooltip" style={{left: pos.x, top: pos.y, display: tipDisplay}}>{tooltipText}</div>
+      </li>
+    );
+  }
+}
+
+class MinorArticleItem extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tooltipText: "",
+      tipDisplay: "none",
+      pos: { x: 0, y: 0 }
+    };
+  }
+
+  tooltip(text, evt) {
+    this.setState({tooltipText: text, pos: {x: (evt.clientX + 5), y: (evt.clientY + 10)}, tipDisplay: "block"});
+  }
+
+  hideTooltip() {
+    this.setState({tipDisplay: "none"});
+  }
+
+  render() {
+    const {pos, tooltipText, tipDisplay} = this.state,
+          readMarker = (this.props.isRead) ? (<i onMouseMove={this.tooltip.bind(this, "Already Read!")} onMouseOut={this.hideTooltip.bind(this)} className="read-marker fa fa-check">&nbsp;</i>) : "",
+          saveMarker = (<i onMouseMove={this.tooltip.bind(this, "Add to Reading List")} onMouseOut={this.hideTooltip.bind(this)} className="save-marker fa fa-plus">&nbsp;</i>);
+
+    return (
+      <li className="article-item article-minor">
+        <div className="article-item-left">
+          <img className="article-item-image" src="http://motherboard-images.vice.com/content-images/article/29058/1450807362692191.jpg" alt="The Worst Hacks of 2015" />
           <div className="article-item-icons">{readMarker} {saveMarker}</div>
+        </div>
+        <div className="article-item-details">
+          <div className="article-item-title">{this.props.title}</div>
+          <div className="article-item-byline">By {this.props.author} <br/> {this.props.date}</div>
+        </div>
+        <div className="tool-tip" ref="tooltip" style={{left: pos.x, top: pos.y, display: tipDisplay}}>{tooltipText}</div>
+      </li>
+    );
+  }
+}
+
+class ReadingListItem extends Component {
+  render() {
+    const {title, author, date, duration} = this.props;
+
+    return (
+      <li className="reading-list-item">
+        <div style={{width: "80%"}}>
+          <span className="item-title">{title}</span>
+          <span className="item-byline">By {author} - {date}</span>
+        </div>
+        <div style={{width: "20%", paddingLeft: 30}}>
+          <span className="item-duration">{duration} minute read</span>
         </div>
       </li>
     );
   }
 }
+
+function readingList(items) {
+  return (
+    <ul className="personal-reading-list">
+      <div className="personal-reading-list-title">Your Reading List</div>
+      {items.map((i) => {
+        return {...i, duration: Math.floor(Math.random() * 20) + 2};
+      }).map((i) => {
+        return (<ReadingListItem {...i} />);
+      })}
+    </ul>
+  );
+}
+
 export default class ReactRoot extends Component {
-
-  componentWillMount() {
-
-  }
-
-  componentDidMount() {
-
-  }
-
   render() {
     const requiredReading = arrArticles.filter((article) => {
             return _.any(article.tags, (tag) => { return (tag === "essential"); });
@@ -47,8 +125,9 @@ export default class ReactRoot extends Component {
             return (<ArticleItem {...article} />);
           }),
           deepDiveList = arrArticles.slice(0, 9).map((article) => {
-            return (<ArticleItem {...article} />);
-          });
+            return (<MinorArticleItem {...article} />);
+          }),
+          readingListElem = readingList(arrArticles.slice(0, 4));
 
 // <div className="issue-image" style={{backgroundImage: `url(${hackingTeam})`}}></div>
 // <img className="issue-image" src={hackingTeam} />
@@ -85,12 +164,14 @@ export default class ReactRoot extends Component {
         </div>
         <div className="reading-list-block">
           <h2>Recommended Reading</h2>
+          <div className="add-all-personal-list"><i className="read-marker fa fa-check">&nbsp;</i> Add all to Reading List.</div>
           <ul className="reading-list essential-reading-list">{requiredReading}</ul>
         </div>
         <div className="reading-list-block">
           <h2>Deep Dive Into the Issue</h2>
           <ul className="reading-list reading-list-small deepdive-reading-list">{deepDiveList}</ul>
         </div>
+        {readingListElem}
       </div>
     );
   }
