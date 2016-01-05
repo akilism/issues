@@ -163,8 +163,10 @@ export default class ReactRoot extends Component {
           </div>
         </div>
         <div className="reading-list-block">
-          <h2>Recommended Reading</h2>
-          <div className="add-all-personal-list"><i className="read-marker fa fa-check">&nbsp;</i> Add all to Reading List.</div>
+          <h2>
+            Recommended Reading
+            <div className="add-all add-personal-list"><i className="read-marker fa fa-check">&nbsp;</i> Add all to Reading List.</div>
+          </h2>
           <ul className="reading-list essential-reading-list">{requiredReading}</ul>
         </div>
         <div className="reading-list-block">
